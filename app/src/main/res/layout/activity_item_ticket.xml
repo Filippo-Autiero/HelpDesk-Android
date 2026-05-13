@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f7f6f2">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarDetail"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#01696f"
+        app:titleTextColor="#FFFFFF"
+        app:navigationIcon="@android:drawable/ic_menu_revert"
+        app:navigationIconTint="#FFFFFF"
+        app:menu="@menu/menu_item_ticket" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Titolo -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutTitolo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Titolo *"
+                android:layout_marginBottom="12dp"
+                app:boxStrokeColor="#01696f"
+                app:hintTextColor="#01696f">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTitolo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Descrizione -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutDescrizione"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descrizione"
+                android:layout_marginBottom="12dp"
+                app:boxStrokeColor="#01696f"
+                app:hintTextColor="#01696f">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDescrizione"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Dove -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutDove"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dove"
+                android:layout_marginBottom="12dp"
+                app:boxStrokeColor="#01696f"
+                app:hintTextColor="#01696f">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Annotazione -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutAnnotazione"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Annotazione"
+                android:layout_marginBottom="16dp"
+                app:boxStrokeColor="#01696f"
+                app:hintTextColor="#01696f">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAnnotazione"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Bottoni Salva/Annulla: visibili solo in create/edit -->
+            <LinearLayout
+                android:id="@+id/layoutBottoni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/btnAnnulla"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Annulla"
+                    android:layout_marginEnd="8dp"
+                    app:strokeColor="#01696f" />
+
+                <Button
+                    android:id="@+id/btnSalva"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salva"
+                    android:backgroundTint="#01696f" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

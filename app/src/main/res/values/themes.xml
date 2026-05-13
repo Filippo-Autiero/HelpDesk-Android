@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.HelpDeskAndroisOS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#01696F</item>
+        <item name="colorPrimaryVariant">#01696F</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#01696F</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="android:statusBarColor">#01696F</item>
+    </style>
+
+</resources>

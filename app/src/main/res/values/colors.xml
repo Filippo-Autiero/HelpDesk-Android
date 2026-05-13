@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="teal_primary">#01696f</color>
+    <color name="teal_dark">#0c4e54</color>
+    <color name="teal_light">#4f98a3</color>
+    <color name="teal_highlight">#cedcd8</color>
+    <color name="bg_main">#f7f6f2</color>
+    <color name="surface">#ffffff</color>
+    <color name="text_primary">#28251d</color>
+    <color name="text_muted">#7a7974</color>
+    <color name="text_faint">#bab9b4</color>
+    <color name="divider">#dcd9d5</color>
+    <color name="priority_high">#a12c7b</color>
+    <color name="priority_medium">#da7101</color>
+    <color name="priority_low">#437a22</color>
+    <color name="badge_open">#cedcd8</color>
+    <color name="badge_closed">#e0ced7</color>
+</resources>
