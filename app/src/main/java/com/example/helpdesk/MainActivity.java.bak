@@ -91,14 +91,7 @@ public class MainActivity extends AppCompatActivity {
         // Carica subito i ticket
         loadTickets();
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        if (!currentEmail.isEmpty() && !currentToken.isEmpty()) {
-            loadTickets();
-        }
-    }
     private void loadTickets() {
         ApiUser user = new ApiUser(currentEmail, currentToken);
         ReadParams params = new ReadParams(0, 1, 50);

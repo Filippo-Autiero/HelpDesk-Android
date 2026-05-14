@@ -2,6 +2,8 @@ package com.example.helpdesk;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,12 +14,21 @@ import retrofit2.http.PUT;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "https://helpdesk.sviluppo.host/ws/services/";    private static Retrofit retrofit = null;
+    private static final String BASE_URL = "https://helpdesk.iismarconipieralisi.it/ws/services/";
+    private static Retrofit retrofit = null;
 
     public static ApiService getClient() {
         if (retrofit == null) {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .addInterceptor(logging)
+                    .build();
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
