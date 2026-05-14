@@ -2,17 +2,19 @@ package com.example.helpdesk;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +25,6 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextInputEditText etEmail, etToken;
-    private Button btnConnetti;
     private RecyclerView recyclerTickets;
     private FloatingActionButton fabNewTicket;
 
@@ -41,9 +41,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etEmail = findViewById(R.id.etEmail);
-        etToken = findViewById(R.id.etToken);
-        btnConnetti = findViewById(R.id.btnConnetti);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Ricevi email e token da LoginActivity
+        currentEmail = getIntent().getStringExtra("EMAIL");
+        currentToken = getIntent().getStringExtra("TOKEN");
+        if (currentEmail == null) currentEmail = "";
+        if (currentToken == null) currentToken = "";
+
         recyclerTickets = findViewById(R.id.recyclerTickets);
         fabNewTicket = findViewById(R.id.fabNewTicket);
 
@@ -74,33 +80,16 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        btnConnetti.setOnClickListener(v -> {
-            String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
-            String token = etToken.getText() != null ? etToken.getText().toString().trim() : "";
-
-            if (email.isEmpty() || token.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Inserisci email e token", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            currentEmail = email;
-            currentToken = token;
-
-            loadTickets();
-        });
-
         fabNewTicket.setOnClickListener(v -> {
-            if (currentEmail.isEmpty() || currentToken.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Prima premi Connetti", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
             Intent intent = new Intent(MainActivity.this, ItemTicketActivity.class);
             intent.putExtra("MODE", "create");
             intent.putExtra("EMAIL", currentEmail);
             intent.putExtra("TOKEN", currentToken);
             ticketLauncher.launch(intent);
         });
+
+        // Carica subito i ticket
+        loadTickets();
     }
 
     private void loadTickets() {
@@ -115,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                     ticketList.clear();
                     ticketList.addAll(response.body());
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(MainActivity.this, "Connesso", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "Errore risposta server", Toast.LENGTH_SHORT).show();
                 }
@@ -126,5 +114,23 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Errore connessione: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_logout) {
+            // Torna alla login
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

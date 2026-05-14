@@ -12,8 +12,7 @@ import retrofit2.http.PUT;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "https://helpdesk.iismarconipieralisi.it/ws/services/";
-    private static Retrofit retrofit = null;
+    private static final String BASE_URL = "https://helpdesk.sviluppo.host/ws/services/";    private static Retrofit retrofit = null;
 
     public static ApiService getClient() {
         if (retrofit == null) {
